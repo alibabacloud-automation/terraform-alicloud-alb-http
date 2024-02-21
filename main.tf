@@ -38,14 +38,14 @@ resource "alicloud_alb_server_group" "alb_server_group" {
   resource_group_id = var.resource_group_id
 
   health_check_config {
-    health_check_connect_port = lookup(var.health_check_config, "health_check_connect_port", 80)
+    health_check_connect_port = lookup(var.health_check_config, "health_check_connect_port", 0)
     health_check_enabled      = lookup(var.health_check_config, "health_check_enabled", "false")
-    health_check_host         = lookup(var.health_check_config, "health_check_host", "")
+    health_check_host         = lookup(var.health_check_config, "health_check_host", null)
     health_check_http_version = lookup(var.health_check_config, "health_check_http_version", "HTTP1.1")
     health_check_interval     = lookup(var.health_check_config, "health_check_interval", "2")
     health_check_method       = lookup(var.health_check_config, "health_check_method", "HEAD")
-    health_check_path         = lookup(var.health_check_config, "health_check_path", "")
-    health_check_protocol     = lookup(var.health_check_config, "health_check_protocol", "")
+    health_check_path         = lookup(var.health_check_config, "health_check_path", null)
+    health_check_protocol     = lookup(var.health_check_config, "health_check_protocol", null)
     health_check_timeout      = lookup(var.health_check_config, "health_check_timeout", "5")
     healthy_threshold         = lookup(var.health_check_config, "healthy_threshold", "3")
     unhealthy_threshold       = lookup(var.health_check_config, "unhealthy_threshold", "3")
@@ -54,7 +54,7 @@ resource "alicloud_alb_server_group" "alb_server_group" {
   sticky_session_config {
     sticky_session_enabled = lookup(var.sticky_session_config, "sticky_session_enabled", "false")
     cookie                 = lookup(var.sticky_session_config, "cookie", "")
-    sticky_session_type    = lookup(var.sticky_session_config, "sticky_session_type", "Server")
+    sticky_session_type    = lookup(var.sticky_session_config, "sticky_session_type", "Insert")
   }
   tags = var.tags
 }

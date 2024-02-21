@@ -19,14 +19,19 @@ resource "alicloud_vswitch" "vswitch_2" {
   vswitch_name = var.vswitch_name_2
 }
 
+resource "random_integer" "default" {
+  max = 99999
+  min = 10000
+}
+
 resource "alicloud_log_project" "default" {
-  name        = var.log_project_name
-  description = "created by terraform"
+  project_name = "${var.log_project_name}-${random_integer.default.result}"
+  description  = "created by terraform"
 }
 
 resource "alicloud_log_store" "default" {
-  project               = alicloud_log_project.default.name
-  name                  = var.log_store_name
+  project_name          = alicloud_log_project.default.project_name
+  logstore_name         = "${var.log_store_name}-${random_integer.default.result}"
   shard_count           = 3
   auto_split            = true
   max_split_shard_count = 60
@@ -42,12 +47,12 @@ module "example" {
   address_allocated_mode = "Fixed"
   load_balancer_name     = "tf_alb_name"
   load_balancer_edition  = "Basic"
-  zone_mappings          = [
+  zone_mappings = [
     { vswitch_id = alicloud_vswitch.vswitch_1.id, zone_id = data.alicloud_alb_zones.default.zones.0.id },
     { vswitch_id = alicloud_vswitch.vswitch_2.id, zone_id = data.alicloud_alb_zones.default.zones.1.id }
   ]
   access_log_config = [
-    { log_project = alicloud_log_project.default.name, log_store = alicloud_log_store.default.name }
+    { log_project = alicloud_log_project.default.project_name, log_store = alicloud_log_store.default.logstore_name }
   ]
   acl_name             = "tf_acl_name"
   server_group_name    = "acl_server_group_name"
