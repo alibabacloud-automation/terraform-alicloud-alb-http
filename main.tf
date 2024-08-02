@@ -67,7 +67,7 @@ resource "alicloud_alb_acl" "alb_acl" {
 
 resource "alicloud_alb_listener" "alb_listener" {
   count                = var.create ? 1 : 0
-  load_balancer_id     = alicloud_alb_load_balancer.alb.0.id
+  load_balancer_id     = alicloud_alb_load_balancer.alb[0].id
   listener_protocol    = "HTTP"
   listener_port        = var.listener_port
   listener_description = var.listener_description
@@ -75,14 +75,16 @@ resource "alicloud_alb_listener" "alb_listener" {
     type = "ForwardGroup"
     forward_group_config {
       server_group_tuples {
-        server_group_id = alicloud_alb_server_group.alb_server_group.0.id
+        server_group_id = alicloud_alb_server_group.alb_server_group[0].id
       }
     }
   }
-  acl_config {
-    acl_type = "White"
-    acl_relations {
-      acl_id = alicloud_alb_acl.alb_acl.0.id
-    }
-  }
+
+}
+
+resource "alicloud_alb_listener_acl_attachment" "default" {
+  count       = var.create ? 1 : 0
+  acl_id      = alicloud_alb_acl.alb_acl[0].id
+  listener_id = alicloud_alb_listener.alb_listener[0].id
+  acl_type    = "White"
 }
