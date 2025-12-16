@@ -47,7 +47,7 @@ module "example" {
   create                 = true
   source                 = "../.."
   vpc_id                 = alicloud_vpc.default.id
-  address_type           = "Internet"
+  address_type           = "Intranet"
   address_allocated_mode = "Fixed"
   load_balancer_name     = "tf_alb_name"
   load_balancer_edition  = "Basic"
