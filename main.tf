@@ -1,11 +1,12 @@
 resource "alicloud_alb_load_balancer" "alb" {
-  count                  = var.create ? 1 : 0
-  vpc_id                 = var.vpc_id
-  address_type           = var.address_type
-  address_allocated_mode = var.address_allocated_mode
-  load_balancer_name     = var.load_balancer_name
-  load_balancer_edition  = var.load_balancer_edition
-  tags                   = var.tags
+  count                       = var.create ? 1 : 0
+  vpc_id                      = var.vpc_id
+  address_type                = var.address_type
+  address_allocated_mode      = var.address_allocated_mode
+  load_balancer_name          = var.load_balancer_name
+  load_balancer_edition       = var.load_balancer_edition
+  tags                        = var.tags
+  deletion_protection_enabled = var.deletion_protection_enabled
   load_balancer_billing_config {
     pay_type = "PayAsYouGo"
   }

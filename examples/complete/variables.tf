@@ -22,20 +22,14 @@ variable "vswitch_name_2" {
   description = "The name of the other v_switch."
 }
 
-variable "create" {
-  description = "Whether to create resources in module."
-  type        = bool
-  default     = false
-}
-
 variable "log_project_name" {
-  default = "tflogprojectname"
-  type = string
+  default     = "tflogprojectname"
+  type        = string
   description = "The name of log project."
 }
 
 variable "log_store_name" {
-  default = "tflogstorename"
-  type = string
+  default     = "tflogstorename"
+  type        = string
   description = "The name of log store."
 }
