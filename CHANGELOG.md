@@ -1,3 +1,19 @@
+## [2.0.0](https://github.com/alibabacloud-automation/terraform-alicloud-alb-http/compare/v1.2.1...v2.0.0) (2026-04-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* add provider version constraint for aliyun/alicloud
+
+### Features
+
+* add provider version constraint for aliyun/alicloud ([1feb9b5](https://github.com/alibabacloud-automation/terraform-alicloud-alb-http/commit/1feb9b5c2a47a87376ccb08e66eac6fcdb60eaf3))
+
+
+### Bug Fixes
+
+* update load balancer address_type ([1c57fd3](https://github.com/alibabacloud-automation/terraform-alicloud-alb-http/commit/1c57fd342bd04870b967b8039dd2bca8f674670b))
+
 ## [1.2.1](https://github.com/alibabacloud-automation/terraform-alicloud-alb-http/compare/v1.2.0...v1.2.1) (2025-11-27)
 
 ## 1.3.0 (Unreleased)
