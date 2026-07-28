@@ -10,5 +10,5 @@ output "this_alb_server_group_id" {
 
 output "this_alb_listener" {
   description = "The ID of ALB http listener."
-  value       = concat(alicloud_alb_listener.alb_listener[*].id, [""])[0]
+  value       = module.example.this_alb_listener
 }
